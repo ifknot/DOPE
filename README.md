@@ -97,16 +97,5 @@ No Subroutines: All control flow via GOTO/loops.
 
 Teletype I/O: Input/output via punch tape or keyboard.
 
-### 6. Design Philosophy
-Teach Fundamentals: Loops, branches, and memory management without abstraction.
-
-Polish Notation: Simplified parsing for the LGP-30’s limited compiler.
-
-Interactive: Immediate feedback (unlike batch-processing FORTRAN).
-
-### 7. Legacy
-Direct Precursor to BASIC: DOPE proved simplicity was viable, inspiring BASIC’s LET, PRINT, and GOTO.
-
-Historical Context: Demonstrates 1960s trade-offs between usability and hardware limits.
-
-
+### 6. Implementation
+For memory access I have attempted to simulate the drum rotation by adding a close approximation of the LGP-30's Drum rotation latency (16.7ms per full rev at 3600 RPM) ~4µs per sector (4096 sectors / 16.7ms). Further the memory access functions mask off the int32_t to 31 bitstl more faithfully represent the DOPE experience.
