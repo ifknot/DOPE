@@ -38,7 +38,9 @@ add_compile_options(
 file(GLOB SOURCES
     CONFIGURE_DEPENDS
     *.c
-
+    PORTABLE/*.c
+    LGP30/*.c
+    DOPE/*.c
 )
 
 # message(Source list="${SOURCES}")
