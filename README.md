@@ -1,20 +1,31 @@
 # DOPE 
 DOPE (Dartmouth Oversimplified Programming Experiment) 
+
 An implementation in C99
 
 ## DOPE Language Manual
-Dartmouth Oversimplified Programming Experiment (DOPE) c.1963
-*For the LGP-30 Computer (4KB RAM, Drum Memory)*
-Reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).
+*An attempt at a reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).*
+
+Dartmouth Oversimplified Programming Experiment (DOPE) c.1963 the fascinating precursor to BASIC developed at Dartmouth in the early 1960s for the LGP-30 (Librascope General Purpose 30) Computer. A machine which, in 1956, cost $47,000 (~$500K today) ! 
+
+LGP-30 Memory Specifications
+Total Capacity: 4,096 words × 31 bits/word = 126,976 bits (in modern terms about 15.5 KB - 126,976 ÷ 8,288 bits/KB, accounting for 31-bit words).
+
+Effective "RAM": No true RAM—all memory was on the rotating magnetic drum. Average latency: ~16.7 ms (waiting for drum rotation to access data).
+
+Throughput: ~30 words/revolution at 3,600 RPM = ~1,800 words/sec
+
+NB No hardware floating-point unit — floating-point arithmetic was implemented in software via subroutines.
 
 ### 1. Introduction
 DOPE was created by John Kemeny and Thomas Kurtz as a teaching tool to introduce programming to beginners. It preceded BASIC (1964) and emphasized:
 
-Ultra-minimalist syntax (single-letter commands).
-
-Polish notation (operations precede operands).
-
-Memory-centric programming (no variables, only addresses).
++ Ultra-minimalist syntax (single-letter commands).
++ Polish notation (operations precede operands).
++ Memory-centric programming (no variables, only addresses).
++ No Variables: Used memory addresses ([100]) instead of named variables (X).
++ No Line Numbers: Steps were implicit (like assembly), but GOTO referenced *step counts*.
++ Interactive but Crude: Ran on the LGP-30 with a teletype, requiring manual address management.
 
 ### 2. Command Reference
 ### Core Instructions
@@ -53,7 +64,7 @@ O100      ! User debugs by inspecting [100]
 ```
 DOPE's terse errors halted compile immediately but these unfriendly errors directly inspired BASIC’s clearer messages. 
 
-Kemeny noted: "We learned from DOPE’s brutality. BASIC had to guide, not frustrate."2.
+Kemeny noted: "We learned from DOPE’s brutality. BASIC had to guide, not frustrate."
 
 ### 4. Programming Examples
 
