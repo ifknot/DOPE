@@ -2,8 +2,9 @@
 DOPE (Dartmouth Oversimplified Programming Experiment) for DOS
 
 ## DOPE Language Manual
-Dartmouth Oversimplified Programming Experiment (1963)
+Dartmouth Oversimplified Programming Experiment (DOPE) c.1963
 *For the LGP-30 Computer (4KB RAM, Drum Memory)*
+Reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).
 
 ### 1. Introduction
 DOPE was created by John Kemeny and Thomas Kurtz as a teaching tool to introduce programming to beginners. It preceded BASIC (1964) and emphasized:
@@ -15,19 +16,20 @@ Polish notation (operations precede operands).
 Memory-centric programming (no variables, only addresses).
 
 ### 2. Command Reference
+### Core Instructions
 
-Core Instructions
-Command	Operation	Example	Explanation
-Z	Zero memory	Z100	Sets address [100] to 0.
-I	Input	I100	Reads a number into [100].
-O	Output	O100	Prints [100] to teletype.
-A	Add	A100 200 300	[300] = [100] + [200].
-S	Subtract	S100 200 300	[300] = [100] - [200].
-U	Multiply	U100 200 300	[300] = [100] * [200].
-D	Divide	D100 200 300	[300] = [100] / [200].
-E	Equal-loop	E100 20	If [100] = 0, jump to step 20.
-G	Greater-loop	G100 30	If [100] > 0, jump to step 30.
-J	Jump (GOTO)	J50	Unconditional jump to step 50.
+| Command | Operation         | Example         | Explanation                          |
+|---------|-------------------|-----------------|--------------------------------------|
+| `Z`     | Zero memory       | `Z100`          | Sets address `[100]` to `0`.         |
+| `I`     | Input             | `I100`          | Reads a number into `[100]`.         |
+| `O`     | Output            | `O100`          | Prints `[100]` to teletype.          |
+| `A`     | Add               | `A100 200 300`  | `[300] = [100] + [200]`.             |
+| `S`     | Subtract          | `S100 200 300`  | `[300] = [100] - [200]`.             |
+| `U`     | Multiply          | `U100 200 300`  | `[300] = [100] * [200]`.             |
+| `D`     | Divide            | `D100 200 300`  | `[300] = [100] / [200]`.             |
+| `E`     | Equal-loop        | `E100 20`       | If `[100] = 0`, jump to step `20`.   |
+| `G`     | Greater-loop      | `G100 30`       | If `[100] > 0`, jump to step `30`.   |
+| `J`     | Jump (GOTO)       | `J50`           | Unconditional jump to step `50`.     |
 
 ### 3. Programming Examples
 
