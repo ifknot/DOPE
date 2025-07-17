@@ -1,5 +1,5 @@
 # DOPE 
-DOPE (Dartmouth Oversimplified Programming Experiment) 
+DOPE (Dartmouth Oversimplified Programming Experiment) John G. Kemeny 1962
 
 An implementation in C99
 
@@ -7,10 +7,19 @@ John G. Kemeny “Back to Basic : The History, Corruption and Future of the Lang
 
 “_I had a high school student, Sidney Marshall, who was taking calculus at Dartmouth. I had him experiment with a language called DOPE on that same LGP-30. DOPE was too primitive to be useful, but it was the precursor of BASIC._”
 
+Dartmouth College accommodated particularly gifted local high school students. Kemeny tasked one of these
+students, Sidney Marshall, to implement a simple language suitable for teaching the basics of programming to
+college freshmen of all fields over the course of three one-hour lectures, as well as for simple research problems.
+Kemeny helped in its design and named it DOPE: the Dartmouth Oversimplified Programing Experiment.
+DOPE's twin goals would prove difficult to reconcile: the rigidity of the language and its limited feature-set
+made it easy to teach to beginners, but not very useful beyond. Although many of its design features presaged
+those later found in BASIC, the lone LGP-30 computer that hosted it was already increasingly busy to the
+point of saturation by the time it was completed in 1962 and DOPE was never widely used.
+
 1. [_VICE_: Tracking Down DOPE, the First Computer Language for Normal Humans](https://www.vice.com/en/article/tracking-down-dope-the-first-computer-language-for-normal-humans/)
 2. [_Wikipedia:_ Dartmouth Oversimplified Programming Experiment](https://en.wikipedia.org/wiki/Dartmouth_Oversimplified_Programming_Experiment)
 3. [_Troy Press:_ DOPE (Dartmouth Oversimplified Programming Experiment)](https://troypress.com/dope-dartmouth-oversimplified-programming-experiment/)
-4. 
+
 ## DOPE Language Manual
 *An attempt at a reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).*
 
