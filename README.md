@@ -13,9 +13,15 @@ John Kemeny “Back to Basic : The History, Corruption and Future of the Languag
 ## DOPE Language Manual
 *An attempt at a reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).*
 
+
+### 1. Introduction
 Dartmouth Oversimplified Programming Experiment (DOPE) c.1963 was the precursor to BASIC developed at Dartmouth in the early 1960s for the LGP-30 (Librascope General Purpose 30) Computer. A machine which, in 1956, cost $47,000 (~$500K today).
 
-### The Librascope General Purpose 30 
+Until the work done by Sean Haas for VICE (2021) [1] there was little information abut DOPE in the public domain - until Hass tracked down "_...a file folder tucked away in Dartmouth’s archive. The manuscript within was simply titled “Dartmouth Oversimplified Programming Experiment”, filed under a collection of Kurtz’s notes. The paper was written in 1962, and for the time gave a radically different approach to programming. It’s definitely not BASIC, but it’s getting close._"
+
+Importantly, DOPE was interactive. By sitting at the teletype terminal of the LGP-30 the user could type in commands, and see results as the LGP-30 compiled (sic) the DOPE program and ran it - according to Kemeny’s paper the DOPE compiler could turn code into executables in under a minute.
+
+### 2. The Librascope General Purpose 30 
 
 **LGP-30 Memory Specifications:**
 
@@ -27,19 +33,29 @@ Throughput: ~30 words/revolution at 3,600 RPM = ~1,800 words/sec
 
 NB No hardware floating-point unit — floating-point arithmetic was implemented in software via subroutines.
 
-### 1. Introduction
-DOPE was created by John Kemeny and Thomas Kurtz as a teaching tool to introduce programming to beginners. It preceded BASIC (1964) and emphasized:
+### 3. Programming with DOPE
+The first idiosyncracy is the matter of single quotes - **DOPE doesn’t separate things with spaces**. Likely, this was due to its host hardware and other languages used on the LGP-30 computer follow the same convention. 
 
-+ Ultra-minimalist syntax (single-letter commands).
-+ Polish notation (operations precede operands).
-+ Interactive but Crude: Ran on the LGP-30 with a teletype.
+Adding 1 and 1, comes out to 
+```
++’1’1’A
+```
+Superficially, DOPE looks a lot more like assembly language than anything else. Most operations are a single character, each line can only perform a simple operation, argument lists are all of a fixed length. All the usual operations for math, assignment, loops, and printing are present, just in a consolidated form.
 
-### 2. Command Reference
++ DOPE uses a loose form of implicit typing, in as much as, every variable is a floating point number.
++ DOPE has four special variables named E, F, G, and H which stand as fixed size 16 element arrays. (When you work with DOPE you just have to remember that these four variables are different)
++ 
+
+There are also no strings in DOPE, you can’t store or manipulate words or letters. Nearly every other programming language can handle strings in some way, so this restriction is pretty noticeable. DOPE was only ever meant for mathematical work so lacking strings isn’t a total dealbreaker.
+
+There is a little bit of subtlety here that I find intriguing. All variables are stored as floats, so any number you enter is converted. Set a variable to 1 and DOPE turns that into 1.000. When you print a variable DOPE figures out the most reasonable format and displays that. So if the float doesn’t have anything past the decimal place it shows up without the decimal. To a more serious programmer this should sound like a nightmare. DOPE takes away any control over data types by just not having data types. Programmers don’t like giving up control, this was especially true during the era DOPE was developed.
+
+### 4. Command Reference
 
 ### Core Instructions
 
 
-### 3. DOPE Error Codes
+### 5. DOPE Error Codes
 Based on historical accounts of DOPE, and its minimalist design, the language likely had a very limited set of errors — consistent with its role as a teaching tool for beginners on the LGP-30 (4KB RAM, drum memory). While no exhaustive error list survives, we can reconstruct plausible errors from its constraints and pedagogical goals. 
 
 ### Error Codes
@@ -51,7 +67,9 @@ DOPE's terse errors halted compile immediately but these unfriendly errors direc
 
 Kemeny noted: "We learned from DOPE’s brutality. BASIC had to guide, not frustrate."
 
-### 4. Programming Examples
+### 6. Programming Examples
 
-### 5. Implementation
+### 7. Implementation
+Each line of DOPE starts with a line number, then an operation, then arguments. From an implementation perspective, this saves a lot of time and code. Simply tokenize each line, the operation is always in the same place, arguments thereafter.
+  
 For memory access I have attempted to simulate the drum rotation by adding a close approximation of the LGP-30's Drum rotation latency (16.7ms per full rev at 3600 RPM) ~4µs per sector (4096 sectors / 16.7ms). Further the memory access functions mask off the int32_t to 31 bitstl more faithfully represent the DOPE experience.
