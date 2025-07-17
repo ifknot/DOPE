@@ -1,0 +1,28 @@
+1'+'5'3'A  # A = 5 + 3
+2'-'A'2'B  # B = A - 2
+3'*'B'4'C  # C = B * 4
+4'/'C'2'D  # D = C / 2
+5'P'D      # Print D (expected: 12)
+
+1'Z'5'0'I  # Loop 5 times: I starts at 0
+2'+'I'1'I  # I = I + 1
+3'P'I      # Print I
+4'E'       # End loop
+
+1'J'X      # Input X
+2'C'X'10'0'5 # If X == 10, jump to line 5
+3'P'0      # Print 0 (false case)
+4'T'1
+5'P'1      # Print 1 (true case)
+6'T'1      # Jump back to line 1 (infinite loop)
+
+1'J'E      # Input E[0] (special array)
+2'J'F      # Input F[0]
+3'+'E'F'G  # G[0] = E[0] + F[0]
+4'P'G      # Print G[0]
+
+1'EXP'2'X  # X = e^2
+2'LOG'X'Y  # Y = ln(X) (should undo EXP)
+3'SIN'3.14159'Z  # Z = sin(π) ≈ 0
+4'P'Y      # Print Y (expected: ~2)
+5'P'Z      # Print Z (expected: ~0)
