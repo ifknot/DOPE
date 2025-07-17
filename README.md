@@ -34,11 +34,14 @@ Throughput: ~30 words/revolution at 3,600 RPM = ~1,800 words/sec
 NB No hardware floating-point unit — floating-point arithmetic was implemented in software via subroutines.
 
 ### 3. Programming with DOPE
-The first idiosyncracy is the matter of single quotes - **DOPE doesn’t separate things with spaces**. Likely, this was due to its host hardware and other languages used on the LGP-30 computer follow the same convention. 
+The first idiosyncracy is the matter of single quotes - **DOPE doesn’t separate things with spaces**. 
+(Likely, this was due to its host hardware and other languages used on the LGP-30 computer follow the same convention.) 
+The second being that whilst DOPE uses line numbers they are implicit - **DOPE uses implicit line numbering**.
 
-Adding 1 and 1, comes out to 
+Thus, adding 1 and 1 into variable A in a never ending loop using the jump command T is coded as:
 ```
 +’1’1’A
+T'1
 ```
 Superficially, DOPE looks a lot more like assembly language than anything else. Most operations are a single character, each line can only perform a simple operation, argument lists are all of a fixed length. All the usual operations for math, assignment, loops, and printing are present, just in a consolidated form.
 
