@@ -3,7 +3,7 @@ DOPE (Dartmouth Oversimplified Programming Experiment)
 
 An implementation in C99
 
-John Kemeny “Back to Basic : The History, Corruption and Future of the Language" (1985) 
+John G. Kemeny “Back to Basic : The History, Corruption and Future of the Language" (1985) 
 
 “_I had a high school student, Sidney Marshall, who was taking calculus at Dartmouth. I had him experiment with a language called DOPE on that same LGP-30. DOPE was too primitive to be useful, but it was the precursor of BASIC._”
 
@@ -13,11 +13,12 @@ John Kemeny “Back to Basic : The History, Corruption and Future of the Languag
 4. 
 ## DOPE Language Manual
 *An attempt at a reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).*
-The origianl paper by Kemeny (1962) was not published but rather is written as a lesson plan and the manual describes how to write flow charts and convert them into DOPE program code - there are even worksheets to help in the process. However, althought DOPE was only used by students for a single semester in 1962 it was the springboard for the development of BASIC.
+
+The origianl paper by John G. Kemeny (1962) was not published but rather is written as a lesson plan and the manual describes how to write flow charts and convert them into DOPE program code - there are even worksheets to help in the process. However, althought DOPE was only used by students for a single semester in 1962 it was the springboard for the development of BASIC.
 
 
 ### 1. Introduction
-Dartmouth Oversimplified Programming Experiment (DOPE) c.1963 was the precursor to BASIC developed at Dartmouth in the early 1960s for the LGP-30 (Librascope General Purpose 30) Computer. A machine which, in 1956, cost $47,000 (~$500K today).
+Dartmouth Oversimplified Programming Experiment (DOPE) was the precursor to BASIC developed at Dartmouth College by John G. Kemeny and others in the early 1960s for the LGP-30 (Librascope General Purpose 30) Computer. A machine which, in 1956, cost $47,000 (~$500K today).
 
 Until the work done by Sean Haas for VICE (2021) [1] there was little information abut DOPE in the public domain - Hass tracked down "_...a file folder tucked away in Dartmouth’s archive. The manuscript within was simply titled “Dartmouth Oversimplified Programming Experiment”, filed under a collection of Kurtz’s notes. The paper was written in 1962, and for the time gave a radically different approach to programming. It’s definitely not BASIC, but it’s getting close._"
 
