@@ -19,6 +19,7 @@ point of saturation by the time it was completed in 1962 and DOPE was never wide
 1. [_VICE_: Tracking Down DOPE, the First Computer Language for Normal Humans](https://www.vice.com/en/article/tracking-down-dope-the-first-computer-language-for-normal-humans/)
 2. [_Wikipedia:_ Dartmouth Oversimplified Programming Experiment](https://en.wikipedia.org/wiki/Dartmouth_Oversimplified_Programming_Experiment)
 3. [_Troy Press:_ DOPE (Dartmouth Oversimplified Programming Experiment)](https://troypress.com/dope-dartmouth-oversimplified-programming-experiment/)
+4. [Man and Mainframe at Dartmouth: Liberal Possibilities in Centralized Computing Shane Shen Lin (2007)](https://libra2.lib.virginia.edu/downloads/tq57nr25f?filename=LinMAThesis.pdf)
 
 ## DOPE Language Manual
 *An attempt at a reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).*
