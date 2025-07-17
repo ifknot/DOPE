@@ -3,12 +3,22 @@ DOPE (Dartmouth Oversimplified Programming Experiment)
 
 An implementation in C99
 
+John Kemeny “Back to Basic : The History, Corruption and Future of the Language" (1985) 
+
+“_I had a high school student, Sidney Marshall, who was taking calculus at Dartmouth. I had him experiment with a language called DOPE on that same LGP-30. DOPE was too primitive to be useful, but it was the precursor of BASIC._”
+
+1. [_VICE_: Tracking Down DOPE, the First Computer Language for Normal Humans](https://www.vice.com/en/article/tracking-down-dope-the-first-computer-language-for-normal-humans/)
+2. [_Wikipedia:_ Dartmouth Oversimplified Programming Experiment](https://en.wikipedia.org/wiki/Dartmouth_Oversimplified_Programming_Experiment)
+3. [_Troy Press:_ DOPE (Dartmouth Oversimplified Programming Experiment)](https://troypress.com/dope-dartmouth-oversimplified-programming-experiment/)
 ## DOPE Language Manual
 *An attempt at a reconstructed DOPE Manual based on historically accepted details from Dartmouth archives and academic accounts of this pre-BASIC language (circa 1962–1963).*
 
-Dartmouth Oversimplified Programming Experiment (DOPE) c.1963 the fascinating precursor to BASIC developed at Dartmouth in the early 1960s for the LGP-30 (Librascope General Purpose 30) Computer. A machine which, in 1956, cost $47,000 (~$500K today) ! 
+Dartmouth Oversimplified Programming Experiment (DOPE) c.1963 was the precursor to BASIC developed at Dartmouth in the early 1960s for the LGP-30 (Librascope General Purpose 30) Computer. A machine which, in 1956, cost $47,000 (~$500K today).
 
-LGP-30 Memory Specifications
+### The Librascope General Purpose 30 
+
+**LGP-30 Memory Specifications:**
+
 Total Capacity: 4,096 words × 31 bits/word = 126,976 bits (in modern terms about 15.5 KB - 126,976 ÷ 8,288 bits/KB, accounting for 31-bit words).
 
 Effective "RAM": No true RAM—all memory was on the rotating magnetic drum. Average latency: ~16.7 ms (waiting for drum rotation to access data).
@@ -22,80 +32,26 @@ DOPE was created by John Kemeny and Thomas Kurtz as a teaching tool to introduce
 
 + Ultra-minimalist syntax (single-letter commands).
 + Polish notation (operations precede operands).
-+ Memory-centric programming (no variables, only addresses).
-+ No Variables: Used memory addresses ([100]) instead of named variables (X).
-+ No Line Numbers: Steps were implicit (like assembly), but GOTO referenced *step counts*.
-+ Interactive but Crude: Ran on the LGP-30 with a teletype, requiring manual address management.
++ Interactive but Crude: Ran on the LGP-30 with a teletype.
 
 ### 2. Command Reference
+
 ### Core Instructions
 
-| Command | Operation         | Example         | Explanation                          |
-|---------|-------------------|-----------------|--------------------------------------|
-| `Z`     | Zero memory       | `Z100`          | Sets address `[100]` to `0`.         |
-| `I`     | Input             | `I100`          | Reads a number into `[100]`.         |
-| `O`     | Output            | `O100`          | Prints `[100]` to teletype.          |
-| `A`     | Add               | `A100 200 300`  | `[300] = [100] + [200]`.             |
-| `S`     | Subtract          | `S100 200 300`  | `[300] = [100] - [200]`.             |
-| `U`     | Multiply          | `U100 200 300`  | `[300] = [100] * [200]`.             |
-| `D`     | Divide            | `D100 200 300`  | `[300] = [100] / [200]`.             |
-| `E`     | Equal-loop        | `E100 20`       | If `[100] = 0`, jump to step `20`.   |
-| `G`     | Greater-loop      | `G100 30`       | If `[100] > 0`, jump to step `30`.   |
-| `J`     | Jump (GOTO)       | `J50`           | Unconditional jump to step `50`.     |
 
 ### 3. DOPE Error Codes
 Based on historical accounts of DOPE, and its minimalist design, the language likely had a very limited set of errors — consistent with its role as a teaching tool for beginners on the LGP-30 (4KB RAM, drum memory). While no exhaustive error list survives, we can reconstruct plausible errors from its constraints and pedagogical goals. 
+
 ### Error Codes
 
-| Code     | Error               | Cause                                      | Debugging Tips                                  |
-|----------|---------------------|--------------------------------------------|------------------------------------------------|
-| `ERR 1`  | **INVALID COMMAND** | Unrecognized single-letter op (e.g., `X100`) | Check command letters (`Z`, `I`, `O`, etc.).   |
-| `ERR 2`  | **ADDRESS OVERFLOW** | Memory access beyond 4KB (e.g., `[5000]`)   | Use addresses `[0]`–`[4095]`.                  |
-| `ERR 3`  | **DIVIDE BY ZERO**   | `D100 0 200` (division by zero)             | Pre-check divisor with `E`/`G` (e.g., `E200 50` to skip if zero). |
-| `ERR 4`  | **INPUT MISMATCH**   | Non-numeric input for `I100`                | Teletype input must be integers/floats (no strings). |
-| `ERR 5`  | **ARITHMETIC FAULT** | Invalid operands (e.g., `A100 'X' 300`)     | Inspect memory with `O` (e.g., `O100` to see corrupted values). |
-| `ERR 6`  | **LOOP OVERFLOW**    | Infinite loop (e.g., missing `G`/`E` exit)  | Manually halt (LGP-30 required physical intervention). |
-| `ERR 7`  | **DRUM SYNC FAILURE** | Slow drum memory (3600 RPM) caused missed ops | Retry or simplify program.                     |
+
 **Example Error Flow**
-```
-I100      ! Reads 'ABC' (non-numeric)  
-ERR 4: INPUT MISMATCH  
-O100      ! User debugs by inspecting [100]
-```
+
 DOPE's terse errors halted compile immediately but these unfriendly errors directly inspired BASIC’s clearer messages. 
 
 Kemeny noted: "We learned from DOPE’s brutality. BASIC had to guide, not frustrate."
 
 ### 4. Programming Examples
 
-A. Sum Two Numbers
-```
-I100    ! Read into [100]  
-I200    ! Read into [200]  
-A100 200 300  ! [300] = [100] + [200]  
-O300    ! Print result
-```  
-Input: ```5 3``` 
-Output: ```8```
-
-B. Countdown Loop
-```
-Z100    ! [100] = 0  
-A100 10 ! [100] = 10 (counter)  
-O100    ! Print counter  
-S100 1  ! Decrement counter  
-G100 3  ! Loop if [100] > 0  
-```
-Output: ```10 9 8 7 6 5 4 3 2 1```
-
-### 5. Hardware Constraints
-Memory: 4KB RAM (addresses [0]–[4095]).
-
-No Variables: Only absolute addressing (e.g., [100]).
-
-No Subroutines: All control flow via GOTO/loops.
-
-Teletype I/O: Input/output via punch tape or keyboard.
-
-### 6. Implementation
+### 5. Implementation
 For memory access I have attempted to simulate the drum rotation by adding a close approximation of the LGP-30's Drum rotation latency (16.7ms per full rev at 3600 RPM) ~4µs per sector (4096 sectors / 16.7ms). Further the memory access functions mask off the int32_t to 31 bitstl more faithfully represent the DOPE experience.
