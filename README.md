@@ -39,35 +39,57 @@ NB No hardware floating-point unit — floating-point arithmetic was implemented
 ### 3. Programming with DOPE
 The first idiosyncracy is the matter of single quotes - **DOPE doesn’t separate things with spaces**. 
 (Likely, this was due to its host hardware and other languages used on the LGP-30 computer follow the same convention.) 
-The second being that whilst DOPE uses line numbers they are implicit - **DOPE uses implicit line numbering**.
+The second being that you don’t have control over DOPE’s line numbers, but each line number is it’s own label.
 
 Thus, adding 1 and 1 into variable A in a never ending loop using the jump command T is coded as:
 ```
-+’1’1’A
-T'1
+1'+’1’1’A
+2'T'2
 ```
 Superficially, DOPE looks a lot more like assembly language than anything else. Most operations are a single character, each line can only perform a simple operation, argument lists are all of a fixed length. All the usual operations for math, assignment, loops, and printing are present, just in a consolidated form.
 
-+ DOPE line numbers are implicit and sequential, you have no control over them, but each line number acts as that line's own label.
++ DOPE each line starts with a line number, then an operation, then arguments, and the number of arguements is fixed.
++ DOPE each line has an implicit number, you start at 1 and go up to 99.
++ DOPE line numbers are used to sort the order of instructions at compilation.
++ DOPE line numbers act as that line's own label.
 + DOPE uses a loose form of implicit typing, in as much as, every variable is a floating point number.
++ DOPE variables can be a single letter followed by 1 number, X1, for example - however...
++ DOPE has four special variables named E, F, G, and H which stand as fixed size 16 element arrays. (When you work with DOPE you just have to remember that these four variables are different)
++ DOPE arrays (E, F, G and H) do not have to be declared and had a default size of 16 - interestingly these are the canonical names for vectors in physics.
 + DOPE was designed for non technical users, so all variables are stored as floats. Set a variable to 1 and DOPE stores that as 1.000.
 + DOPE prints a variable it chooses the most reasonable format and displays it. Such that, if the float doesn’t have anything past the decimal place only the integer part is printed.
 + DOPE has no string types, it is unable to store or manipulate words or letters - DOPE was only ever meant for mathematical work.
 + DOPE operations are 1 per line and have fixed numbers of arguements.
 + DOPE operations are, for the most part, single characters. For example, Z is the loop operator taking an iterator starting value, whilst E is the end of the loop.
-+ DOPE variables can be a single letter followed by 1 number, X1, for example - however...
-+ DOPE has four special variables named E, F, G, and H which stand as fixed size 16 element arrays. (When you work with DOPE you just have to remember that these four variables are different)
-+ 
++ DOPE only has a for loop
++ DOPE has 3 letter operations for exponentiation EXP, logarithm LOG, sine SIN, and square root SQR.
 
 ### 4. Command Reference
 
-### Core Instructions
+| Operation | Function                     | Number of operands |
+|-----------|------------------------------|--------------------|
+| `A`       | Ask (prompt for input)        | 2                  |
+| `C`       | Arithmetic IF                 | 4                  |
+| `E`       | End loop                      | Unknown            |
+| `J`       | Input into variable           | 1                  |
+| `N`       | Print a newline               | Unknown            |
+| `P`       | Print a variable              | 1                  |
+| `T`       | Jump                          | 1                  |
+| `Z`       | For loop                      | Unknown            |
+| `+`       | Addition                      | 3                  |
+| `-`       | Subtraction                   | 3                  |
+| `*`       | Multiplication                | 3                  |
+| `/`       | Division                      | 3                  |
+| `EXP`     | e to the power                | 2                  |
+| `LOG`     | Logarithm                     | 2                  |
+| `SIN`     | Sine                          | 2                  |
+| `SQR`     | Square root                   | 2                  |
 
 
 ### 5. DOPE Error Codes
 Based on historical accounts of DOPE, and its minimalist design, the language likely had a very limited set of errors — consistent with its role as a teaching tool for beginners on the LGP-30 (4KB RAM, drum memory). While no exhaustive error list survives, we can reconstruct plausible errors from its constraints and pedagogical goals. 
 
-### Error Codes
+
 
 
 **Example Error Flow**
