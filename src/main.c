@@ -1,10 +1,6 @@
-#include <stdio.h>
-#include "CONTRACT/contract.h"
+#include "CONTRACT/demo_contracts.h"
 
 int main() {
-    printf("Exercise DbC\n");
-    require(0, "oh no!");
-
-    printf("done\n");
+    demo_contracts();
     return 0;
 }
