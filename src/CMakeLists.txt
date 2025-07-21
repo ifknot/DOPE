@@ -39,7 +39,11 @@ file(GLOB SOURCES
     CONFIGURE_DEPENDS
     *.c
     PORTABLE/*.c
-    FUTIL/*.c
+    STRUTIL/*.c
+    FILEUTIL/*.c
+    DOS/*.c
+    MEM/*.c
+    CONTRACT/*.c
     LGP30/*.c
     DOPE/*.c
 )

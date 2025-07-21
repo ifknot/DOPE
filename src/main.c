@@ -1,9 +1,10 @@
 #include <stdio.h>
-#include "PORTABLE/portable_sleep.h"
+#include "CONTRACT/contract.h"
 
 int main() {
-    printf("DOPE\n");
-    portable_sleep_ms(300);
-    printf("hello\n");
+    printf("Exercise DbC\n");
+    require(0, "oh no!");
+
+    printf("done\n");
     return 0;
 }
