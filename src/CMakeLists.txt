@@ -10,28 +10,33 @@ project(
     LANGUAGES C
 )
 
-# Ideally put in Toolchain-watcom.cmake
-# set(CMAKE_TOOLCHAIN_FILE Toolchain-watcom.cmake)
-# but for readability
+# Toolchain setup
 set(CMAKE_SYSTEM_NAME DOS)      # Target DOS
 set(CMAKE_C_COMPILER wcl)
 set(CMAKE_CXX_COMPILER wcl)
 set(CMAKE_LINKER wlink)         # Use Watcom's linker
-
-# Watcom-specific flags
-set(CMAKE_C_FLAGS "-bt=dos -l=dos")
-set(CMAKE_EXE_LINKER_FLAGS "system dos")
+set(CMAKE_EXECUTABLE_SUFFIX ".exe")
 
 # watcom compiler options
 # https://users.pja.edu.pl/~jms/qnx/help/watcom/compiler-tools/cpopts.html
+if(WATCOM)
 add_compile_options(
+    -0                  # Generate 8086/8088 instructions ONLY (no 286+)
+    -e1                 # Minimal stack checking (saves bytes for 64KB segments)
     -za99               # undocumented switch enable partial C99 compatibility
     -ml                 # memory model options - large model
+    -bt=dos             # Target DOS
+    -l=dos              # DOS library
+    -od                 # Disable optimizations (prevents 286+ instruction sneaking in)
+    -w1                 # Mild warnings (avoid /w3 due to 8086 quirks)
+    -zq                 # Quiet mode (cleaner output)
     #-dNDEBUG
-    #-ox         # Optimize for speed (optional)
-    -bt=dos     # Target DOS
-    -l=dos      # DOS library
 )
+add_definitions(
+    -D__DOS__
+    -D__8086__  # Explicit 8086 target
+  )
+endif()
 
 # WARNING: Using GLOB for convenience. If adding new files, rerun:
 #   ./cmk.sh
