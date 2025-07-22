@@ -26,14 +26,14 @@ long file_get_size(FILE* file) {
     require_fd(file, "NULL file handle!");
 
     long original_pos = ftell(file);
-    require_io_success(original_pos != -1L, "FAILED to get current position");
+    require_io_success(original_pos != -1L, strerror(errno));
 
-    require_io_success(fseek(file, 0, SEEK_END) == 0, "FAILED seek to end!");
+    require_io_success(fseek(file, 0, SEEK_END) == 0, strerror(errno));
 
     long size = ftell(file);
-    require_io_success(size != -1L, "FAILED to get file size!");
+    require_io_success(size != -1L, strerror(errno));
 
-    require_io_success(fseek(file, original_pos, SEEK_SET) == 0, "FAILED to restore file position!");
+    require_io_success(fseek(file, original_pos, SEEK_SET) == 0, strerror(errno));
     return (long)size;
 }
 
@@ -41,14 +41,14 @@ bool file_position_indicator_is_eof(FILE* file) {
     require_fd(file, "NULL file handle!");
 
     long current_pos = ftell(file);
-    require_io_success(current_pos != -1L, "FAILED to get current position");
+    require_io_success(current_pos != -1L, strerror(errno));
 
-    require_io_success(fseek(file, 0, SEEK_END) == 0, "FAILED seek to end!");
+    require_io_success(fseek(file, 0, SEEK_END) == 0, strerror(errno));
 
     long end_pos = ftell(file);
-    require_io_success(end_pos != -1L, "FAILED to get end position");
+    require_io_success(end_pos != -1L, strerror(errno));
 
-    require_io_success(fseek(file, current_pos, SEEK_SET) == 0, "FAILED to restore file position!");
+    require_io_success(fseek(file, current_pos, SEEK_SET) == 0, strerror(errno));
 
     return current_pos == end_pos;
 }
