@@ -124,7 +124,7 @@ static const char* posix_error_messages[] = {
     "Cross-device link"                  // POSIX_EXDEV
 };
 
-static inline const char *_contract_strerror(int err) {
+static const char* _contract_strerror(int err) {
     switch (err) {
         case POSIX_E2BIG: return "Argument list too long";
         case POSIX_EACCES: return "Permission denied";

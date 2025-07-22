@@ -1,6 +1,5 @@
 #include "str_utils.h"
 #include "../CONTRACT/contract.h"
-#include <stddef.h>
 
 // Trims line endings in-place for any line length
 void str_trim_line_endings(char* line) {

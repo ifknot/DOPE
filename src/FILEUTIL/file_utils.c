@@ -1,67 +1,77 @@
 #include "file_utils.h"
 #include "file_constants.h"
+#include "../CONTRACT/contract.h"
+#include <errno.h>
 #include <string.h>
 #include <stdio.h>
 
 
 const char* file_get_extension(const char* file_path) {
-    if (!file_path) {
-        return NULL;
-    }
+    require_address(file_path, "NULL file path");
+
     const char* last_dot = strrchr(file_path, FILE_EXTENSION_DELIM);
-    if (!last_dot || last_dot == file_path || !strcmp(last_dot, ".")) {
-        return NULL;
+
+    // Cases where return empty string:
+    // 1. No dot found
+    // 2. Dot is at start (hidden file without extension)
+    // 3. Dot is last character ("file.")
+    if (!last_dot || last_dot == file_path || *(last_dot + 1) == '\0') {
+        return "";
     }
-    else {
-        return ++last_dot;
-    }
+
+    return last_dot + 1;  // Skip the dot
 }
 
 long file_get_size(FILE* file) {
-    if (!file) return 0;
+    require_fd(file, "NULL file handle!");
 
     long original_pos = ftell(file);
-    if (original_pos == -1L) return 0;
+    require_io_success(original_pos != -1L, strerror(errno));
 
-    if (fseek(file, 0, SEEK_END) != 0) return 0;
+    require_io_success(fseek(file, 0, SEEK_END) == 0, strerror(errno));
 
     long size = ftell(file);
-    if (size == -1L) return 0;
+    require_io_success(size != -1L, strerror(errno));
 
-    if (fseek(file, original_pos, SEEK_SET) != 0) return 0;
+    require_io_success(fseek(file, original_pos, SEEK_SET) == 0, strerror(errno));
     return (long)size;
 }
 
 bool file_position_indicator_is_eof(FILE* file) {
-    if (!file) return true;
+    require_fd(file, "NULL file handle!");
 
     long current_pos = ftell(file);
-    if (current_pos == -1L) return true;
+    require_io_success(current_pos != -1L, strerror(errno));
 
-    if (fseek(file, 0, SEEK_END) != 0) return true;
+    require_io_success(fseek(file, 0, SEEK_END) == 0, strerror(errno));
 
     long end_pos = ftell(file);
-    if (end_pos == -1L) return true;
+    require_io_success(end_pos != -1L, strerror(errno));
 
-    if (fseek(file, current_pos, SEEK_SET) != 0) return true;
+    require_io_success(fseek(file, current_pos, SEEK_SET) == 0, strerror(errno));
 
     return current_pos == end_pos;
 }
 
 long file_position_indicator_reset(FILE* file) {
-    if (!file) return -1;
+    require_fd(file, "NULL file handle!");
+
     long prev_pos = ftell(file);
-    if (prev_pos == -1L) return -1;
-    if (fseek(file, 0, SEEK_SET) != 0) return -1;
+    require_io_success(prev_pos != -1L, strerror(errno));
+
+    require_io_success(fseek(file, 0, SEEK_SET) == 0, strerror(errno));
+
     return prev_pos;
 }
 
 long file_position_indicator_move(FILE* file, long offset, int origin) {
-    assert(file != NULL);
-    assert(origin == SEEK_SET || origin == SEEK_CUR || origin == SEEK_END);
+    require_fd(file, "NULL file handle!");
+    require_arg_list(origin == SEEK_SET || origin == SEEK_CUR || origin == SEEK_END, "INVALID origin!");
 
     long prev_pos = ftell(file);
-    if (prev_pos == -1L) return -1;
-    if (fseek(file, offset, origin) != 0) return -1;
+    require_io_success(prev_pos != -1L, strerror(errno));
+
+    require_io_success(fseek(file, offset, origin) == 0, strerror(errno));
+
     return prev_pos;
 }
