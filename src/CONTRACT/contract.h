@@ -25,38 +25,27 @@ static inline void _contract_fail(
 ) {
     time_t now = time(NULL);
     struct tm *tm_info;
-    char tstr[9]; // HH:MM:SS\0
-    char shortfile[13]; // 8.3+1 (\0) - DOS 8.3 filename format
+    char datetime[20]; // YYYY-MM-DD HH:MM:SS\0
+    const char *filename = file;
 
-    /* Watcom-compatible time handling */
-    tm_info = localtime(&now);  // Note: not thread-safe, but fine for DOS
+    /* Extract just the filename portion */
+    const char *last_slash = strrchr(file, '\\');
+    if (!last_slash) last_slash = strrchr(file, '/');
+    if (last_slash) filename = last_slash + 1;
 
-    /* Format time as HH:MM:SS */
-    strftime(tstr, sizeof(tstr), "%H:%M:%S", tm_info);
+    /* Format date+time */
+    tm_info = localtime(&now);
+    strftime(datetime, sizeof(datetime), "%Y-%m-%d %H:%M:%S", tm_info);
 
-    /* DOS-style filename extraction (8.3 format) */
-    const char *base = strrchr(file, '\\');  // DOS uses backslashes
-    if (!base) base = strrchr(file, '/');    // Fallback to forward slash
-    base = base ? base + 1 : file;
-
-    /* Truncate to 8.3 format */
-    size_t len = strlen(base);
-    if (len <= 12) {
-        strcpy(shortfile, base);
-    } else {
-        /* DOS 8.3 format: 8 chars for name, then extension */
-        strncpy(shortfile, base, 8);
-        const char *dot = strchr(base, '.');
-        if (dot && (dot - base) <= 8) {
-            strncpy(shortfile + 8, dot, 4);  // Copy .ext (max 3 chars + dot)
-        }
-        shortfile[12] = '\0';
-    }
-
-    /* Watcom's stderr output - using DOS-compatible formatting */
+    /* Output with clean filename */
     fprintf(stderr, "[%s] %s:%d|%s|%d(%s)|%s\n",
-            tstr, shortfile, line, cond, errno,
-            strerror(errno), msg);
+            datetime,
+            filename,  // Just the filename, no path
+            line,
+            cond,
+            errno,
+            _contract_strerror(errno),
+            msg);
     abort();
 }
 
@@ -74,7 +63,39 @@ static inline void _contract_fail(
 // =============================================================================
 // Default Contract
 // =============================================================================
-#define require(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EINVAL)
+#define require(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EINVAL)       // Caller's fault
+#define ensure(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EINVAL)        // Function's fault
+#define invariant(cond, msg)  _CONTRACT_ENFORCE(cond, msg, POSIX_EINVAL)    // Object's fault
+
+
+// =============================================================================
+// Memory/Validity Guards
+// =============================================================================
+#define ensure_address(ptr, msg) \
+    ensure((ptr) != NULL, msg)  // POSIX_EFAULT implied by failure
+
+#define ensure_valid_encoding(str, msg) \
+    ensure(mblen(str, MB_CUR_MAX) != -1, msg)  // POSIX_EILSEQ
+
+
+// =============================================================================
+// Mathematical Guarantees
+// =============================================================================
+#define ensure_in_range(val, min, max, msg) \
+    ensure((val) >= (min) && (val) <= (max), msg)  // POSIX_ERANGE/EDOM
+
+#define ensure_no_overflow(val, msg) \
+    ensure((val) != INT_MAX && (val) != LONG_MAX, msg)  // POSIX_EOVERFLOW
+
+
+// =============================================================================
+// State Consistency
+// =============================================================================
+#define ensure_resource_available(cond, msg) \
+    ensure(cond, msg)  // POSIX_EAGAIN/EBUSY implied
+
+#define ensure_mutex_consistent(cond, msg) \
+    ensure(cond, msg)  // POSIX_EDEADLK implied
 
 // =============================================================================
 // Process/System Contracts
