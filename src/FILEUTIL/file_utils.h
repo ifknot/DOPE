@@ -16,20 +16,19 @@
 /**
  * @brief Extracts file extension from path
  * @param file_path Null-terminated path string
- * @return Pointer to extension or NULL if none exists
+ * @return Pointer to extension or empty string if none exists
  *
- * @retval NULL for:
- *         - NULL input
- *         - No extension found
- *         - Hidden files (".profile")
- *         - Trailing dots ("file.")
+ * @retval file_get_extension("archive.zip") → "zip"
+ * file_get_extension("README")     → ""
+ * file_get_extension(".bashrc")   → ""
+ * file_get_extension("backup.")   → ""
  */
 const char* file_get_extension(const char* file_path);
 
 /**
  * @brief Gets file size without modifying position
  * @param fhandle Valid DOS file handle
- * @return File size in bytes or -1 on error
+ * @return File size in bytes or 0
  *
  * @details
  * - Uses seek-to-end method
@@ -51,10 +50,9 @@ bool file_position_indicator_is_eof(FILE* fhandle);
 /**
  * @brief Resets file position indicator to start of file
  * @param file Valid FILE pointer
- * @return Previous file position or -1 on error
+ * @return Previous file position
  *
  * @retval >=0 Previous file position
- * @retval -1 Error (invalid file pointer or I/O error)
  */
 long file_position_indicator_reset(FILE* file);
 
