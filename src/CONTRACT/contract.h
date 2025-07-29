@@ -85,7 +85,7 @@ static inline void _contract_fail(
 #define ensure(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EINVAL)        // Function's fault
 #define invariant(cond, msg)  _CONTRACT_ENFORCE(cond, msg, POSIX_EINVAL)    // Object's fault
 
-// Contract specialisations ensure_*
+// Semantically useful contract specialisations for ensure_*
 // Memory/Validity Guards
 #define ensure_address(ptr, msg) _CONTRACT_ENFORCE((ptr) != NULL, msg, POSIX_EFAULT)  /// @example ensure_address(result_ptr, "Function failed to allocate memory");
 #define ensure_valid_encoding(valid_cond, msg) _CONTRACT_ENFORCE(valid_cond, msg, POSIX_EILSEQ)  /// @example ensure_valid_encoding(is_valid_utf8(result_str), "Function returned invalid UTF-8");
@@ -98,7 +98,7 @@ static inline void _contract_fail(
 #define ensure_resource_available(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EBUSY)  /// @example ensure_resource_available(sem_trywait(&sem) == 0, "Function failed to acquire required resource");
 #define ensure_mutex_consistent(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EDEADLK)  /// @example ensure_mutex_consistent(pthread_mutex_consistent(&mutex) == 0, "Mutex state inconsistent after function call");
 
-// Contract specialisations require_*
+// Semantically useful contract specialisations for require_*
 // Process/System Contracts
 #define require_arg_list(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_E2BIG)  /// @example require_arg_list(argv_size < 4096, "Argument list exceeds system limit");
 #define require_id_valid(cond, msg) _CONTRACT_ENFORCE(cond, msg, POSIX_EIDRM)  /// @example require_id_valid(shm_id != -1, "Invalid shared memory ID");
