@@ -2,7 +2,7 @@
 
 *Exploring the spirit and implementation of Dartmouth's precursor to BASIC as an interpreter written in C.*
 
-## Synopsis
+## SynopsisX
 
 > The Dartmouth Oversimplified Programming Experiment (DOPE) was a programming language developed at Dartmouth College by John G. Kemeny and others in the early 1960s, specifically for the LGP-30 computer. It was designed as a simplified tool for teaching programming to non-science students. [Wikipedia ](https://en.wikipedia.org/wiki/Dartmouth_Oversimplified_Programming_Experiment), [VICE Article ](https://vice.com/...link-to-vice-article-if-available)
 
