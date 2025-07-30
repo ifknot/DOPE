@@ -10,7 +10,7 @@ DOPE is largely lost to history, overshadowed by its famous successor, BASIC. Fo
 
 Recreating DOPE, even in a simplified form, isn't about nostalgia. It's about understanding the foundational ideas of making computing accessible and the constraints under which early pioneers worked. It forces a confrontation with the simplicity that was *possible* when the goal was clarity over capability.
 
-## **Motivation**
+## **Motivations**
 
 Why implement a language that was deemed "too primitive to be useful" by its own creator, surviving only a single semester?
 
@@ -24,7 +24,7 @@ The answer, embodied in `dope.c` and `lgp30_sim.h`, was a surprisingly functiona
 
 DOPE's design is driven by two overriding principles: extreme simplicity for the user and minimal complexity for the interpreter. This manifests in several key ways.
 
-The language does away with almost any notion of complex data types. Every variable is a floating-point number. There is no need for declarations; you just use them. Four special variables, `E`, `F`, `G`, and `H`, are implicitly understood to be fixed-size arrays, a small concession to needing slightly more complex data structures without adding syntax. 
+The language does away with almost any notion of complex data types. Every variable is a floating-point number. There is no need for declarations; you just use them. Four special variables, `E`, `F`, `G`, and `H`, are implicitly understood to be fixed-size arrays, a small concession to needing slightly more complex data structures without adding syntax.
 
 Program structure is entirely linear and based on numbered lines. These numbers are not just for ordering; they are the labels you jump to. This eliminates the need for separate `GOTO` labels or complex control flow constructs at the syntax level. Sorting lines by number gives you your execution order automatically.
 
@@ -50,7 +50,7 @@ Lines follow the format: `<line_number>'<operation>'<operand1>'<operand2>...`
 - **Operations:** Mostly single letters for common tasks (`+`, `-`, `*`, `/`, `P` for print, `J` for input, `T` for jump, `Z` for loop start, `E` for loop end). Three-letter codes handle mathematical functions (`EXP`, `LOG`, `SIN`, `SQR`).
 - **Operands:** The number is fixed for each operation. This eliminates the need for complex parsing. Variables are typically single letters optionally followed by a single digit (e.g., `X`, `X1`). Arrays `E`, `F`, `G`, `H` are indexed implicitly when used in context (e.g., `P'E3` prints the 4th element of array `E`).
 
-This leads to programs that look more like assembly language flowcharts than modern code. 
+This leads to programs that look more like assembly language flowcharts than modern code.
 
 For example, a simple infinite loop adding 1+1 into `A`:
 
