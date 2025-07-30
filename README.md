@@ -10,7 +10,7 @@ DOPE is largely lost to history, overshadowed by its famous successor, BASIC. Fo
 
 Recreating DOPE, even in a simplified form, isn't about nostalgia. It's about understanding the foundational ideas of making computing accessible and the constraints under which early pioneers worked. It forces a confrontation with the simplicity that was *possible* when the goal was clarity over capability.
 
-## **Motivation**
+## **Motivations**
 
 Why implement a language that was deemed "too primitive to be useful" by its own creator, surviving only a single semester?
 
